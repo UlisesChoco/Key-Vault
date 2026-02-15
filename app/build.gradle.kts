@@ -2,6 +2,8 @@ plugins {
     //provides @Serialization annotation
     alias(libs.plugins.jetbrains.kotlin.serialization)
 
+    id("com.google.devtools.ksp")
+
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
@@ -41,6 +43,10 @@ android {
 }
 
 dependencies {
+    //room db
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
     //navigation 3 + kotlin serialization
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
