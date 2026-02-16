@@ -1,16 +1,16 @@
 package com.chocolatada.keyvault
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.chocolatada.keyvault.navigation.NavigationComposable
 import com.chocolatada.keyvault.ui.theme.KeyVaultTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,9 +20,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             KeyVaultTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    NavigationComposable(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues = innerPadding)
                     )
                 }
             }
@@ -30,18 +31,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KeyVaultTheme {
-        Greeting("Android")
-    }
+//nice extension fun
+//i'll probably move it to other file later
+fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }
