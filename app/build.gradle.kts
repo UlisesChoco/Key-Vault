@@ -43,6 +43,13 @@ android {
 }
 
 dependencies {
+    //appcompat
+    implementation(libs.androidx.appcompat)
+
+
+    //authentication
+    implementation(libs.androidx.biometric)
+
     //room db
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)

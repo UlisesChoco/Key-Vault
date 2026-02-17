@@ -3,9 +3,9 @@ package com.chocolatada.keyvault
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import com.chocolatada.keyvault.navigation.NavigationComposable
 import com.chocolatada.keyvault.ui.theme.KeyVaultTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,7 +23,8 @@ class MainActivity : ComponentActivity() {
                     NavigationComposable(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(paddingValues = innerPadding)
+                            .padding(paddingValues = innerPadding),
+                        activity = this
                     )
                 }
             }
