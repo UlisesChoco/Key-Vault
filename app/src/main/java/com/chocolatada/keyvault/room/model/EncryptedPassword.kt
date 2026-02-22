@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "encrypted_password")
 data class EncryptedPassword(
     @PrimaryKey(autoGenerate = true) val uid: Int = 0,
-    @ColumnInfo(name = "title") val title: String = "Key Vault Password",
+    @ColumnInfo(name = "title") var title: String = "Key Vault Password",
     @ColumnInfo(name = "password") val password: ByteArray,
     @ColumnInfo(name = "iv") val iv: ByteArray
 ) {

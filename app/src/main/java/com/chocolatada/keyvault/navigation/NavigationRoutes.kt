@@ -5,3 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 object AuthenticationScreen: NavKey
+
+@Serializable
+object AccountsScreen: NavKey

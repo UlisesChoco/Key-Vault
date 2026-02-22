@@ -8,7 +8,10 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.chocolatada.keyvault.MainActivity
 import com.chocolatada.keyvault.di.KeyVaultApp
+import com.chocolatada.keyvault.di.factory.AccountsViewModelFactory
 import com.chocolatada.keyvault.di.factory.AuthenticationViewModelFactory
+import com.chocolatada.keyvault.features.accounts.presentation.AccountsComposable
+import com.chocolatada.keyvault.features.accounts.presentation.AccountsViewModel
 import com.chocolatada.keyvault.features.authentication.presentation.AuthenticationComposable
 import com.chocolatada.keyvault.features.authentication.presentation.AuthenticationViewModel
 
@@ -34,10 +37,19 @@ fun NavigationComposable(
                     viewModel = viewModel,
                     activity = activity,
                     onAuthenticated = {
-                        //change this later
-                        //it should navigate to home screen
                         backStack.clear()
+                        backStack.add(AccountsScreen)
                     }
+                )
+            }
+            entry<AccountsScreen> {
+                val viewModel = viewModel<AccountsViewModel>(
+                    factory = AccountsViewModelFactory(
+                        accountsRepository = KeyVaultApp.accountsRepository
+                    )
+                )
+                AccountsComposable(
+                    viewModel = viewModel
                 )
             }
         }
