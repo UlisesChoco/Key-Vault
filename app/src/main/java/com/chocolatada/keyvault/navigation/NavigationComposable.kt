@@ -34,6 +34,8 @@ fun NavigationComposable(
                     viewModel = viewModel,
                     activity = activity,
                     onAuthenticated = {
+                        //change this later
+                        //it should navigate to home screen
                         backStack.clear()
                     }
                 )
