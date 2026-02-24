@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class EncryptedPassword(
     @PrimaryKey(autoGenerate = true) val uid: Int = 0,
     @ColumnInfo(name = "title") var title: String = "Key Vault Password",
-    @ColumnInfo(name = "password") val password: ByteArray,
+    @ColumnInfo(name = "password") var password: ByteArray,
     @ColumnInfo(name = "iv") val iv: ByteArray
 ) {
     override fun equals(other: Any?): Boolean {

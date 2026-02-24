@@ -8,3 +8,6 @@ object AuthenticationScreen: NavKey
 
 @Serializable
 object AccountsScreen: NavKey
+
+@Serializable
+data class AccountDetailScreen(val uid: Int): NavKey

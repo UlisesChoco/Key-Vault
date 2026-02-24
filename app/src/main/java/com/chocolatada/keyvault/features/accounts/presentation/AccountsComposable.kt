@@ -21,7 +21,8 @@ import com.chocolatada.keyvault.toast
 @Composable
 fun AccountsComposable(
     modifier: Modifier = Modifier,
-    viewModel: AccountsViewModel
+    viewModel: AccountsViewModel,
+    onAccountDetail: (Int) -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsState()
     when(uiState.value) {
@@ -31,7 +32,8 @@ fun AccountsComposable(
         is AccountsUiState.Success -> {
             val uiStateSuccess = (uiState.value as AccountsUiState.Success)
             AccountsListComposable(
-                accounts = uiStateSuccess.accounts
+                accounts = uiStateSuccess.accounts,
+                onAccountDetail = onAccountDetail
             )
         }
         is AccountsUiState.Error -> {
@@ -45,7 +47,8 @@ fun AccountsComposable(
 
 @Composable
 fun AccountsListComposable(
-    accounts: List<AccountsDto>
+    accounts: List<AccountsDto>,
+    onAccountDetail: (Int) -> Unit
 ) {
     val ctx = LocalContext.current
     LazyColumn(
@@ -62,9 +65,7 @@ fun AccountsListComposable(
                     fontSize = 12.sp
                 )
                 Button(
-                    onClick = {
-                        ctx.toast(message = "UID: ${account.uid}")
-                    }
+                    onClick = { onAccountDetail(account.uid) }
                 ) {
                     Text(
                         text = "Account details"

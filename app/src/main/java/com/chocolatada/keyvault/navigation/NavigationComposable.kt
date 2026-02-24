@@ -8,8 +8,11 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.chocolatada.keyvault.MainActivity
 import com.chocolatada.keyvault.di.KeyVaultApp
+import com.chocolatada.keyvault.di.factory.AccountDetailViewModelFactory
 import com.chocolatada.keyvault.di.factory.AccountsViewModelFactory
 import com.chocolatada.keyvault.di.factory.AuthenticationViewModelFactory
+import com.chocolatada.keyvault.features.account_detail.presentation.AccountDetailComposable
+import com.chocolatada.keyvault.features.account_detail.presentation.AccountDetailViewModel
 import com.chocolatada.keyvault.features.accounts.presentation.AccountsComposable
 import com.chocolatada.keyvault.features.accounts.presentation.AccountsViewModel
 import com.chocolatada.keyvault.features.authentication.presentation.AuthenticationComposable
@@ -49,7 +52,23 @@ fun NavigationComposable(
                     )
                 )
                 AccountsComposable(
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    onAccountDetail = { uid ->
+                        backStack.add(AccountDetailScreen(uid))
+                    }
+                )
+            }
+            entry<AccountDetailScreen> { data ->
+                val viewModel = viewModel<AccountDetailViewModel>(
+                    factory = AccountDetailViewModelFactory(
+                        accountDetailRepository = KeyVaultApp.accountDetailRepository
+                    )
+                )
+                viewModel.loadAccountDetail(data.uid)
+                AccountDetailComposable(
+                    viewModel = viewModel,
+                    uid = data.uid,
+                    onBack = { backStack.removeLastOrNull() }
                 )
             }
         }

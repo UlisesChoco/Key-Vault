@@ -3,6 +3,8 @@ package com.chocolatada.keyvault.di
 import android.app.Application
 import androidx.room.Room
 import com.chocolatada.keyvault.crypto.KeyStoreUtil
+import com.chocolatada.keyvault.features.account_detail.data.AccountDetailDataSource
+import com.chocolatada.keyvault.features.account_detail.domain.IAccountDetailRepository
 import com.chocolatada.keyvault.features.accounts.data.AccountsDataSource
 import com.chocolatada.keyvault.features.accounts.domain.IAccountsRepository
 import com.chocolatada.keyvault.features.authentication.domain.IAuthenticationRepository
@@ -17,6 +19,8 @@ class KeyVaultApp: Application() {
         lateinit var authenticationRepository: IAuthenticationRepository
 
         lateinit var accountsRepository: IAccountsRepository
+
+        lateinit var accountDetailRepository: IAccountDetailRepository
     }
 
     override fun onCreate() {
@@ -35,5 +39,7 @@ class KeyVaultApp: Application() {
         authenticationRepository = AuthenticationDataSource()
 
         accountsRepository = AccountsDataSource(encryptedPasswordDao)
+
+        accountDetailRepository = AccountDetailDataSource(encryptedPasswordDao)
     }
 }
